@@ -1,9 +1,8 @@
 package com.nueljoe.polling.model;
 
+import com.nueljoe.polling.model.audit.DateAudit;
 
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.NaturalId;
-import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,7 +10,17 @@ import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
-public class User {
+@Entity
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+                "username"
+        }),
+        @UniqueConstraint(columnNames = {
+                "email"
+        })
+})
+
+public class User extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,8 +36,6 @@ public class User {
 
     @NaturalId
     @NotNull
-    @Size
-    @Email
     private  String email;
 
     @NotNull
