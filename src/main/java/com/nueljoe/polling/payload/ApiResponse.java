@@ -5,9 +5,20 @@ public class ApiResponse {
     private Boolean success;
     private String message;
 
-    public ApiResponse(Boolean success, String message) {
+    private Integer status_code;
+
+    public ApiResponse(Boolean success, String message, Integer status_code) {
         this.success = success;
+        this.status_code = status_code;
         this.message = message;
+    }
+
+    public Integer getStatus_code() {
+        return status_code;
+    }
+
+    public void setStatus_code(Integer status_code) {
+        this.status_code = status_code;
     }
 
     public Boolean getSuccess() {
